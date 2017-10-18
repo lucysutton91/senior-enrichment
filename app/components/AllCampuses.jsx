@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -21,18 +22,20 @@ export default class AllCampuses extends Component {
 
   render () {
       const campuses = this.state.campuses;
-      console.log(campuses)
     return (
         <div>
         {
             campuses.map(campus => {
               return (
-                <div key={campus.id}>
-                  <h2>{ campus.name }</h2>
-                </div>
+                <Link key={campus.name} to={`/campuses/${campus.id}`}>
+                  <div>
+                    <h2>{campus.name}</h2>
+                    <img className ="campusImage" src={`/image_assets/${campus.name}.png`} width="200" />
+                  </div>
+                </Link>
               );
             })
-          }
+        }
       </div>
     );
   }
