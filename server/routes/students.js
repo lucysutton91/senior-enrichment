@@ -5,7 +5,7 @@ const express = require('express');
 const api = require('express').Router();
 const models = require('../../db/models/index.js');
 const Student = models.Student;
-const Campus = models.Campus;
+// const Campus = models.Campus;
 
 api.get('/', (req, res, next) => {
 	Student.findAll()
@@ -42,6 +42,17 @@ api.put('/:studentId', (req, res, next) => {
 		})
 		.then(updatedStudent => {
 			res.json(updatedStudent)
+		})
+	})
+	.catch(next)
+})
+
+api.delete('/:studentId', (req, res, next) => {
+	Student.findById(req.params.studentId)
+	.then(pupil => {
+		pupil.destroy()
+		.then(() => {
+			res.json('student deleted')
 		})
 	})
 	.catch(next)

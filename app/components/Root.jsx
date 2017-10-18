@@ -28,6 +28,7 @@ import AllCampuses from './AllCampuses';
 import AllStudents from './AllStudents';
 import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
+import AddStudentForm from './AddStudentForm';
 import Navbar from './Navbar';
 
 const Root = (props) => {
@@ -38,7 +39,9 @@ const Root = (props) => {
         <Route exact path="/campuses" component={AllCampuses} />
         <Route exact path="/students" component={AllStudents} />
         <Route exact path="/campuses/:campusId" component={SingleCampus} />
+        <Route exact path="/students/add_student" component={AddStudentForm} />
         <Route exact path="/students/:studentId" component={SingleStudent} />
+        <Route path="/" />
       </Switch>
     </div>
   )

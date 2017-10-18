@@ -5,6 +5,9 @@ const Navbar = (props) => {
     return (
       <div>
         <h1>The Margaret Hamilton Interplanetary Academy for Space Learning</h1>
+        <Link to="/">
+            <button>Home</button>
+        </Link>
         <Link to="/campuses">
             <button>Campuses</button>
         </Link>
