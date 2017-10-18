@@ -1,42 +1,39 @@
-import React, { Component } from 'react';
-import store, { fetchStudents } from '../store'
+// import React, { Component } from 'react';
+// import { Route, Switch, Redirect } from 'react-router-dom';
+// import Navbar from './Navbar';
+// import AllCampuses from './AllCampuses';
+// import SingleCampus from './SingleCampus';
+// import AllStudents from './AllStudents';
+// import SingleStudent from './SingleStudent';
 
-// export default class Root extends Component () {
-//   // constructor () {
-//   //   super();
-//   //   this.state = store.getState();
-//   // }
-
-//   componentDidMount () {
-//     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
-//   }
-
-//   componentWillUnmount () {
-//     this.unsubscribe();
-//   }
-
-
-//   render () {
-//     console.log(this);
+// export default class Main extends Component {
+//   render () {  
 //     return (
-//       <div>
-//         <Navbar />
-//         <h1>I'm Here</h1>
-//         {
-//         // <Switch>
-//         //   <Route exact path='/students' component={AllStudents} />
-//         //   <Route exact path='/campuses' component={AllCampuses} />
-//         //   <Route exact path='/students/:studentId' component={OneStudent} />
-//         //   <Route exact path='/campuses/:campusId' component={OneCampus} />
-//         // </Switch>
-//         }
-//       </div>
+      // <div>
+      //   <Switch>
+      //     <Route exact path="/campuses" component={AllCampuses} />
+      //   </Switch>
+      // </div>
 //     )
 //   }
 // }
 
-export default function Root () {
+// export default Root;
+
+
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+
+import AllCampuses from './AllCampuses';
+
+const Root = (props) => {
   return (
-    <h1>Hello</h1>
+    <div>
+      <Switch>
+        <Route exact path="/campuses" component={AllCampuses} />
+      </Switch>
+    </div>
   )
 }
+
+export default Root;
