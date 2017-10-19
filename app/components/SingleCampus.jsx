@@ -55,7 +55,7 @@ export default class SingleCampus extends Component {
                 })
             }
             </ul>
-            <button className="edit-campus" onClick={this.toggleEdit}>Edit</button>
+            <button className="edit-campus btn btn-primary" onClick={this.toggleEdit}>Edit</button>
         </div>
     </div>
     );

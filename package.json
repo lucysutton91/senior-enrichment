@@ -17,7 +17,10 @@
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.15.2",
+    "bootstrap": "^4.0.0-beta",
+    "bower": "^1.8.2",
     "chalk": "^1.1.3",
+    "designmodo-flat-ui": "file:flat-ui",
     "express": "^4.14.0",
     "pg": "^6.1.0",
     "pg-native": "^1.10.0",
@@ -38,6 +41,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "react-edit-inline": "^1.0.8",
     "volleyball": "^1.4.1",
     "webpack": "^3.5.5"
   }

@@ -3,19 +3,17 @@ import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
     return (
-      <div>
-        <h1>The Margaret Hamilton Interplanetary Academy for Space Learning</h1>
+      <nav className="navbar navbar-default">
         <Link to="/">
-            <button>Home</button>
+            <h1 className="navbar-brand">The Margaret Hamilton Interplanetary Academy for Space Learning</h1>
         </Link>
-        <Link to="/campuses">
-            <button>Campuses</button>
-        </Link>
-        <Link to="/students">
-            <button>Students</button>
-        </Link>
-      </div>
+            <ul className="nav navbar-nav">
+                <li><Link to="/campuses">Campuses</Link></li>
+                <li><Link to="/students">Students</Link></li>
+            </ul>
+      </nav>
     )
   }
   
   export default Navbar;
+
