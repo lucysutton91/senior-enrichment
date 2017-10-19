@@ -57,15 +57,16 @@ export default class AddStudentForm extends Component {
           
         const campuses = this.state.campuses;
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="add-form interior" onSubmit={this.handleSubmit}>
                 <label>Name:
-                    <input type="text" value={this.state.name} onChange={this.handleNameChange} />
+                    <input className="form-control" type="text" value={this.state.name} onChange={this.handleNameChange} />
                 </label>
                 <label>Email:
-                    <input type="text" value={this.state.email} onChange={this.handleEmailChange} />
+                    <input className="form-control" type="text" value={this.state.email} onChange={this.handleEmailChange} />
                 </label>
+
                 <label>Select Campus:
-                    <select value={this.state.currentCampusId} onChange={this.handleCampusChange}>
+                    <select className="form-control" value={this.state.currentCampusId} onChange={this.handleCampusChange}>
                         {
                             campuses.map(campus => {
                                 return (
@@ -76,7 +77,7 @@ export default class AddStudentForm extends Component {
                     </select>
                 </label>
 
-                <input type="submit" value="save" />
+                <input className="btn btn-info" type="submit" value="save" />
             </form>
         )
         

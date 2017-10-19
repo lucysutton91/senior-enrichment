@@ -33,7 +33,7 @@ export default class SingleStudent extends Component {
       const student = this.state.currentStudent;
       const campus = this.state.currentCampus;
     return (
-        <div>
+        <div className="interior">
             <h2>{student.name}</h2>
             <h3>Email: {student.email}</h3>
             <Link to={`/campuses/${campus.id}`}>

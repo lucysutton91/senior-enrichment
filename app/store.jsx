@@ -77,7 +77,7 @@ export function fetchStudents () {
 }
 
 export function fetchStudent () {
-    
+
     return function thunk (dispatch) {
         return axios.get('/api/student/:studentId')
             .then(res => res.data)
@@ -89,7 +89,7 @@ export function fetchStudent () {
 }
 
 export function fetchCampuses () {
-    
+
       return function thunk (dispatch) {
         return axios.get('/api/campuses')
             .then(res => res.data)
@@ -99,9 +99,9 @@ export function fetchCampuses () {
             });
     }
 }
-    
+
 export function fetchCampus () {
-    
+
     return function thunk (dispatch) {
         return axios.get('/api/campus/:campusId')
             .then(res => res.data)
@@ -125,7 +125,7 @@ export function registerStudent (studentInfo) {
 }
 
 export function registerCampus (campusInfo) {
-    
+
     return function thunk (dispatch) {
         return axios.post('/api/campuses', campusInfo)
             .then(res => res.data)
@@ -134,55 +134,44 @@ export function registerCampus (campusInfo) {
                 dispatch(action);
             });
     }
-    
+
 }
 
 // REDUCER
 
 function reducer (state = initialState, action) {
+    let newState;
+    switch (action.type) {
 
-  switch (action.type) {
+        case GET_STUDENTS:
+            newState = Object.assign({}, state, { students: action.students });
+            break;
 
-    case GET_STUDENTS:
-        return {
-            //...store,
-            students: action.students
-        };
+        case GET_STUDENT:
+            newState = Object.assign({}, state, { currentStudent: action.currentStudent });
+            break;
 
-    case GET_STUDENT:
-        return {
-            // ...store,
-            currentStudent: action.currentStudent
-        };
+        case GET_CAMPUSES:
+            newState = Object.assign({}, state, { campuses: action.campuses });
+            break;
 
-    case GET_CAMPUSES:
-        return {
-            // ...store,
-            campuses: campuses
-        };
+        case GET_CAMPUS:
+            newState = Object.assign({}, state, { currentCampus: action.campus });
+            break;
 
-    case GET_CAMPUS:
-        return {
-            // ...store,
-            currentCampus: action.campus
-        };
-    
-    case ADD_STUDENT:
-        return {
-            // ...store,
-        students: [...action.students, action.student]
-    };
+        case ADD_STUDENT:
+            newState = Object.assign({}, state, { students: [...action.students, action.student] });
+            break;
 
-    case ADD_CAMPUS:
-        return {
-            // ...store,
-        campuses: [...action.campuses, action.campus]
-        };
+        case ADD_CAMPUS:
+            newState = Object.assign({}, state, { campuses: [...action.campuses, action.campus] });
+            break;
 
-    default:
-        return state;
-
+        default:
+            newState = state;
+            break;
     }
+    return newState;
 }
 
 const store = createStore(

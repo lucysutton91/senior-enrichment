@@ -39,14 +39,14 @@ export default class AddCampusForm extends Component {
       render () {
         console.log('state', this.state)
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="add-form interior" onSubmit={this.handleSubmit}>
                 <label>Campus Name:
-                    <input type="text" value={this.state.name} onChange={this.handleNameChange} />
+                    <input className="form-control" type="text" value={this.state.name} onChange={this.handleNameChange} />
                 </label>
                 <label>Add Image Url:
-                    <input type="text" value={this.state.imageURL} onChange={this.handleImageChange} />
+                    <input className="form-control" type="text" value={this.state.imageURL} onChange={this.handleImageChange} />
                 </label>
-                <input type="submit" value="save" />
+                <input className="btn btn-info" type="submit" value="save" />
             </form>
         )
         

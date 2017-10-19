@@ -30,9 +30,9 @@ export default class AllCampuses extends Component {
   render () {
       const campuses = this.state.campuses;
     return (
-        <div>
+        <div className="interior">
           <Link to="/campuses/add_campus">
-            <button>Add Campus</button>
+            <button className="btn btn-success add-btn">Add Campus</button>
           </Link>
         {
             campuses.map(campus => {
@@ -44,7 +44,7 @@ export default class AllCampuses extends Component {
                       <img className ="campusImage" src={`/image_assets/${campus.name}.png`} width="200" />
                     </div>
                   </Link>
-                  <button className="remove-campus" onClick={(e) => this.handleClick(campus.id, e)}>x</button>
+                  <button className="remove-campus btn btn-danger" onClick={(e) => this.handleClick(campus.id, e)}>x</button>
                 </div>
               );
             })

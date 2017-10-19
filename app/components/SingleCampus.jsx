@@ -39,7 +39,7 @@ export default class SingleCampus extends Component {
     const campus = this.state.currentCampus;
     const students = this.state.students;
     return (
-    <div>
+    <div className="interior">
         <div>
             <h2>{campus.name}</h2>
             <img className ="campusImage" src={`/image_assets/${campus.name}.png`} width="200" />
@@ -55,7 +55,7 @@ export default class SingleCampus extends Component {
                 })
             }
             </ul>
-            <button className="edit-campus btn btn-primary" onClick={this.toggleEdit}>Edit</button>
+            <button className="edit-campus btn btn-hg btn-primary" onClick={this.toggleEdit}>Edit</button>
         </div>
     </div>
     );

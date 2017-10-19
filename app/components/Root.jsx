@@ -34,7 +34,7 @@ import Navbar from './Navbar';
 
 const Root = (props) => {
   return (
-    <div>
+    <div className="body-border">
       <Navbar />
       <Switch>
         <Route exact path="/campuses" component={AllCampuses} />

@@ -34,22 +34,21 @@ export default class AllStudents extends Component {
   render () {
       const students = this.state.students;
     return (
-        <div>
-        <h1>The Students:</h1>
+        <div className="interior">
         <Link to="/students/add_student">
-          <button>Add Student</button>
+          <button className="btn btn-success add-btn">Add Student</button>
         </Link>
+        <h1>The Students:</h1>
+        
         {
             students.map(student => {
               return (
-                <div key={student.id}>
-                    <Link to={`/students/${student.id}`}>
-                    <div>
+                <div key={student.id} >
+                    <Link to={`/students/${student.id}`} className="student-list">
                         <img className ="studentImage" src="image_assets/profile_placeholder.png" width="50" />
                         <p>{student.name}</p>
-                    </div>
                     </Link>
-                        <button className="remove-student" onClick={(e) => this.handleClick(student.id, e)}>x</button>
+                    <button className="remove-student student-list btn btn-danger" onClick={(e) => this.handleClick(student.id, e)}>x</button>
                 </div>
               );
             })

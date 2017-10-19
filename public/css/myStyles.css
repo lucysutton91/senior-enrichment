@@ -1,0 +1,28 @@
+body {
+    background-color: #ecf0f1;
+}
+
+
+.body-border {
+    margin: 1em 1em 1em 1em;
+}
+
+p {
+    color: #c7254e;
+}
+
+.student-list {
+    display: inline-block;
+}
+
+.add-btn {
+    float: right;
+}
+
+.add-form {
+    display: inline-grid;
+}
+
+.interior {
+    margin : 0 2em 2em 2em;
+}
