@@ -45,7 +45,7 @@ export default class EditCampusForm extends Component {
   handleSumbit (event) {
     axios.put(`/api/campuses/${this.state.currentCampus.id}`, {
         name: this.state.name ? this.state.name : this.state.currentCampus.name,
-        imageURL : this.state.imageURL ? this.state.imageURL : this.state.imageURL
+        imageURL : this.state.imageURL ? this.state.imageURL : this.state.currentCampus.imageURL
     })
     .then(res => res.data)
     .then(updatedCampus => {
