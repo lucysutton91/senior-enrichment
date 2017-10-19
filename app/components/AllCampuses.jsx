@@ -20,19 +20,32 @@ export default class AllCampuses extends Component {
       });
   }
 
+  handleClick (campusId, event) {
+    axios.delete(`/api/campuses/${campusId}`)
+    .then((response) => {
+      this.setState({ response }); //the page is not refreshing
+    })
+  }
+
   render () {
       const campuses = this.state.campuses;
     return (
         <div>
+          <Link to="/campuses/add_campus">
+            <button>Add Campus</button>
+          </Link>
         {
             campuses.map(campus => {
               return (
-                <Link key={campus.name} to={`/campuses/${campus.id}`}>
-                  <div>
-                    <h2>{campus.name}</h2>
-                    <img className ="campusImage" src={`/image_assets/${campus.name}.png`} width="200" />
-                  </div>
-                </Link>
+                <div key={campus.name}>
+                  <Link to={`/campuses/${campus.id}`}>
+                    <div>
+                      <h2>{campus.name}</h2>
+                      <img className ="campusImage" src={`/image_assets/${campus.name}.png`} width="200" />
+                    </div>
+                  </Link>
+                  <button className="remove-campus" onClick={(e) => this.handleClick(campus.id, e)}>x</button>
+                </div>
               );
             })
         }

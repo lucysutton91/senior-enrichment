@@ -50,6 +50,15 @@ api.put('/:campusId', (req, res, next) => {
 		})
 	})
 	.catch(next)
-})
-
+});
+api.delete('/:campusId', (req, res, next) => {
+	Campus.findById(req.params.campusId)
+	.then(school => {
+		school.destroy()
+		.then(() => {
+			res.json('campus deleted')
+		})
+	})
+	.catch(next)
+});
 module.exports = api

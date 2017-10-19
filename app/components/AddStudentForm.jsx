@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default class AllStudents extends Component {
+export default class AddStudentForm extends Component {
     
       constructor () {
         super();
         this.state = {
           currentStudent : {},
           campuses : [],
-          currentCampus : {},
+          currentCampusId : 'none',
           email : '',
           name : ''
         };
@@ -28,14 +28,16 @@ export default class AllStudents extends Component {
       }
     
       handleSubmit (event) {
+        const campusId = Number(this.state.currentCampusId);
         axios.post('api/students', {
             name : this.state.name,
             email : this.state.email,
-            campusId : this.currentCampus.id
+            campusId : campusId
         } )
         .then(res => res.data)
         .then(newStudent => {
             this.setState({ currentStudent : newStudent })
+            console.log('New student: ', newStudent)
         })
       }
 
@@ -48,11 +50,11 @@ export default class AllStudents extends Component {
       }
 
       handleCampusChange (event) {
-        this.setState({currentCampus: event.target.value});
+        this.setState({currentCampusId: event.target.value});
       }
     
       render () {
-          console.log('state', this.state)
+          
         const campuses = this.state.campuses;
         return (
             <form onSubmit={this.handleSubmit}>
@@ -63,11 +65,11 @@ export default class AllStudents extends Component {
                     <input type="text" value={this.state.email} onChange={this.handleEmailChange} />
                 </label>
                 <label>Select Campus:
-                    <select value={this.state.currentCampus} onChange={this.handleCampusChange}>
+                    <select value={this.state.currentCampusId} onChange={this.handleCampusChange}>
                         {
                             campuses.map(campus => {
                                 return (
-                                    <option key ={campus.name} value={campus}>{campus.name}</option>
+                                    <option key ={campus.name} value={campus.id}>{campus.name}</option>
                                 )
                             })
                         }

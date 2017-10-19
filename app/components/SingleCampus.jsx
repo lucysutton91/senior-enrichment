@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, TextInput } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,11 +9,14 @@ export default class SingleCampus extends Component {
     super();
     this.state = {
       currentCampus: {},
-      students : []
+      students : [],
+      isEditing: false
     };
+      this.toggleEdit = this.toggleEdit.bind(this);
   }
 
   componentDidMount () {
+      
     const campusId = this.props.match.params.campusId;
     axios.get(`/api/campuses/${campusId}`)
         .then(res => res.data)
@@ -27,10 +30,16 @@ export default class SingleCampus extends Component {
     });
   }
 
+  toggleEdit() {
+    this.setState({isEditing: !this.state.isEditing})
+  }
+
   render () {
-      const campus = this.state.currentCampus;
-      const students = this.state.students;
+    console.log('state', this.state)
+    const campus = this.state.currentCampus;
+    const students = this.state.students;
     return (
+    <div>
         <div>
             <h2>{campus.name}</h2>
             <img className ="campusImage" src={`/image_assets/${campus.name}.png`} width="200" />
@@ -46,8 +55,9 @@ export default class SingleCampus extends Component {
                 })
             }
             </ul>
+            <button className="edit-campus" onClick={this.toggleEdit}>Edit</button>
         </div>
-
+    </div>
     );
   }
 }
