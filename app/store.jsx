@@ -17,7 +17,8 @@ const initialState = {
   students: [],
   campuses: [],
   currentStudent: {},
-  currentCampus: {}
+  currentCampus: {},
+  editingCampus: false
 };
 
 // ACTION TYPES
@@ -28,9 +29,15 @@ const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUS = 'GET_CAMPUS';
 const ADD_STUDENT = 'ADD_STUDENT';
 const ADD_CAMPUS = 'ADD_CAMPUS';
+const TOGGLE_EDIT_CAMPUS = 'TOGGLE_EDIT_CAMPUS';
 
 
 // ACTION CREATORS
+
+export function changeCampusEditingStatus (boolean) {
+    const action = { type: TOGGLE_EDIT_CAMPUS, boolean };
+    return action;
+}
 
 export function getStudents (students) {
     const action = { type: GET_STUDENTS, students };
@@ -100,10 +107,10 @@ export function fetchCampuses () {
     }
 }
 
-export function fetchCampus () {
+export function fetchCampus (campusId) {
 
     return function thunk (dispatch) {
-        return axios.get('/api/campus/:campusId')
+        return axios.get(`/api/campuses/${campusId}`)
             .then(res => res.data)
             .then(campus => {
                 const action = getCampus(campus);
@@ -137,6 +144,19 @@ export function registerCampus (campusInfo) {
 
 }
 
+export function fetchStudentsByCampus (campusId) {
+    
+        return function thunk (dispatch) {
+            return axios.get(`/api/campuses/${campusId}/students`)
+            .then(res => res.data)
+            .then(students => {
+                const action = getStudents(students);
+                dispatch(action);
+            });
+        }
+    
+}
+
 // REDUCER
 
 function reducer (state = initialState, action) {
@@ -166,7 +186,9 @@ function reducer (state = initialState, action) {
         case ADD_CAMPUS:
             newState = Object.assign({}, state, { campuses: [...action.campuses, action.campus] });
             break;
-
+        case TOGGLE_EDIT_CAMPUS:
+            newState = Object.assign({}, state, { editingCampus: action.boolean });
+            break;
         default:
             newState = state;
             break;

@@ -2,36 +2,34 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AddStudentForm from './AddStudentForm';
-
+import store, { fetchStudents } from '../store';
 
 export default class AllStudents extends Component {
 
   constructor () {
     super();
-    this.state = {
-      students: [],
-      response: ''
-    };
+    this.state = store.getState();
     this.handleClick = this.handleClick.bind(this);
-    this.forceUpdate = this.forceUpdate.bind(this);
   }
 
   componentDidMount () {
-    axios.get(`/api/students`)
-      .then(res => res.data)
-      .then(students => {
-        this.setState({ students })
-      });
+    this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
+    store.dispatch(fetchStudents());
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   handleClick (studentId, event) {
     axios.delete(`/api/students/${studentId}`)
-    .then((response) => {
-      this.setState({ response }); //the page is not refreshing
+    .then(() => {
+      store.dispatch(fetchStudents());
     })
   }
 
   render () {
+      console.log(this.state);
       const students = this.state.students;
     return (
         <div className="interior">

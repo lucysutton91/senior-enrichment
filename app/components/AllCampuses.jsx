@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import store, { fetchCampuses } from '../store';
 
 export default class AllCampuses extends Component {
 
   constructor () {
     super();
-    this.state = {
-      campuses: []
-    };
+    this.handleClick = this.handleClick.bind(this);
+    this.state = store.getState();
+  }
+  componentDidMount () {
+    this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
+    store.dispatch(fetchCampuses());
   }
 
-  componentDidMount () {
-    axios.get(`/api/campuses`)
-      .then(res => res.data)
-      .then(campuses => {
-        this.setState({ campuses })
-      });
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   handleClick (campusId, event) {
     axios.delete(`/api/campuses/${campusId}`)
-    .then((response) => {
-      this.setState({ response }); //the page is not refreshing
+    .then(() => {
+      store.dispatch(fetchCampuses());
     })
   }
 
@@ -38,7 +37,7 @@ export default class AllCampuses extends Component {
             campuses.map(campus => {
               return (
                 <div key={campus.name}>
-                  <Link to={`/campuses/${campus.id}`}>
+                  <Link to={`/campuses/${campus.id}`} >
                     <div>
                       <h2>{campus.name}</h2>
                       <img className ="campusImage" src={`/image_assets/${campus.name}.png`} width="200" />

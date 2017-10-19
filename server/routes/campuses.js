@@ -43,7 +43,7 @@ api.put('/:campusId', (req, res, next) => {
 	.then(campus => {
 		campus.update({
 			name : req.body.name,
-			imageURL : req.body.imageUrl
+			imageURL : req.body.imageURL
 		})
 		.then(updatedSchool => {
 			res.json(updatedSchool)

@@ -7,7 +7,7 @@ const Campus = db.define('campus', {
         type : Sequelize.STRING, 
         allowNull : false
     },
-    imageURL : Sequelize.STRING
+    imageURL : Sequelize.TEXT
 });
 
 module.exports = Campus;

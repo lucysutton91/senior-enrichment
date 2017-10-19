@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import store, { fetchCampuses, registerStudent } from '../store';
 
 export default class AddCampusForm extends Component {
     
@@ -17,6 +18,7 @@ export default class AddCampusForm extends Component {
       }
     
       handleSubmit (event) {
+        console.log('submit')
         axios.post('api/campuses', {
             name : this.state.name,
             imageURL : this.state.imageURL,
@@ -24,7 +26,7 @@ export default class AddCampusForm extends Component {
         .then(res => res.data)
         .then(newCampus => {
             this.setState({ currentCampus : newCampus })
-            console.log('New student: ', newCampus)
+
         })
       }
 

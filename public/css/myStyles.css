@@ -25,4 +25,33 @@ p {
 
 .interior {
     margin : 0 2em 2em 2em;
+    display: flex;
+}
+
+.campus-edit-student-list {
+    display: grid;
+}
+
+.edit-form {
+    display: inline-grid;
+    width: 33%;
+}
+.edit-form-el {
+    width: 100%;
+}
+li {
+    list-style-type: none;
+}
+.campus-edit-student-list {
+     padding : 0 0 0 0;
+}
+.edit-form-name {
+    font-size: 15px;
+    font-style: bold;
+}
+.edit-form-email {
+    font-size: 15px;
+}
+.campus-image {
+    width: 100%;
 }

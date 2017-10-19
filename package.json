@@ -20,7 +20,6 @@
     "bootstrap": "^4.0.0-beta",
     "bower": "^1.8.2",
     "chalk": "^1.1.3",
-    "designmodo-flat-ui": "file:flat-ui",
     "express": "^4.14.0",
     "pg": "^6.1.0",
     "pg-native": "^1.10.0",

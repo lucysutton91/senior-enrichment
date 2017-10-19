@@ -59,4 +59,4 @@ api.delete('/:studentId', (req, res, next) => {
 })
 
 
-module.exports = api
+module.exports = api;
