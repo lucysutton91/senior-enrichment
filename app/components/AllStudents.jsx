@@ -32,18 +32,20 @@ export default class AllStudents extends Component {
       console.log(this.state);
       const students = this.state.students;
     return (
-        <div className="interior">
-        <Link to="/students/add_student">
-          <button className="btn btn-success add-btn">Add Student</button>
-        </Link>
+        <div className="interior interior-students">
+        <div className="students-header">
         <h1>The Students:</h1>
-        
+          <Link to="/students/add_student">
+            <button className="btn btn-success add-btn">Add Student</button>
+          </Link>
+        </div>
+        <div className="row">
         {
             students.map(student => {
               return (
-                <div key={student.id} >
+                <div className="student-square col col-4" key={student.id} >
                     <Link to={`/students/${student.id}`} className="student-list">
-                        <img className ="studentImage" src="image_assets/profile_placeholder.png" width="50" />
+                        <img className ="student-image" src="image_assets/profile_placeholder.png" width="100%" />
                         <p>{student.name}</p>
                     </Link>
                     <button className="remove-student student-list btn btn-danger" onClick={(e) => this.handleClick(student.id, e)}>x</button>
@@ -51,6 +53,7 @@ export default class AllStudents extends Component {
               );
             })
         }
+        </div>
       </div>
     );
   }

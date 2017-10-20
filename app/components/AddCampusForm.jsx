@@ -39,7 +39,6 @@ export default class AddCampusForm extends Component {
       }
     
       render () {
-        console.log('state', this.state)
         return (
             <form className="add-form interior" onSubmit={this.handleSubmit}>
                 <label>Campus Name:

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import store, { changeStudentEditingStatus, fetchStudent } from '../store';
-
+import store, { changeStudentEditingStatus, fetchStudent, fetchCampus } from '../store';
+import EditStudentForm from './EditStudentForm';
 
 export default class SingleStudent extends Component {
 
@@ -15,62 +15,36 @@ export default class SingleStudent extends Component {
   componentDidMount () {
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));    
     const studentId = this.props.match.params.studentId;
-    store.dispatch(fetchStudent(studentId));
-    
-    // axios.get(`/api/students/${studentId}`)
-    //     .then(res => res.data)
-    //     .then(currentStudent => {
-    //         this.setState({ currentStudent })
-    //     })
-    //     .then(() => {
-    //       axios.get(`/api/campuses/${this.state.currentStudent.campusId}`)
-    //         .then(res => res.data)
-    //         .then(currentCampus => {
-    //           this.setState({ currentCampus })
-    //       });
-    //     })
+    store.dispatch(fetchStudent(studentId))
+    .then(student => {
+        store.dispatch(fetchCampus(this.state.currentStudent.campusId))
+    })
+    store.dispatch(changeStudentEditingStatus(false));
   }
+
   componentWillUnmount() {
     this.unsubscribe();
   }
+
   toggleEdit() {
     store.dispatch(changeStudentEditingStatus(true));
   }
 
   render () {
       const student = this.state.currentStudent;
-      const view = this.state.editingStudent ? <EditStudentForm student={student} /> : (
+      const campus = this.state.currentCampus;
+      const view = this.state.editingStudent ? <EditStudentForm student={student} campus={campus} /> : (
       <div className="edit-form interior">
-      
-          <h2>{campus.name}</h2>
-          <img className ="campus-image" src={campus.imageURL} />
-          <h3>Students at {campus.name}</h3>
-          <ul className="student-list">
-          {
-              students.map(student => {
-                  return (
-                      <Link key={student.name} to={`/students/${student.id}`}>
-                          <li>{student.name}  {student.email}</li>
-                      </Link>
-                  )
-              })
-          }
-          </ul>
+          <img className ="student-image" src="image_assets/profile_placeholder.png" width="100%" />
+          <h2>{student.name}</h2>
+          <h3>{student.email}</h3>
+          <Link to={`/campuses/${campus.id}`}>
+            <h3>Campus: {campus.name}</h3>
+          </Link>
           <button className="edit-campus btn btn-hg btn-primary" onClick={this.toggleEdit}>Edit</button>
-      
     </div>
         )
         return view;
-    // return (
-    //     <div className="interior">
-    //         <h2>{student.name}</h2>
-    //         <h3>Email: {student.email}</h3>
-    //         <Link to={`/campuses/${campus.id}`}>
-    //           <h3>Campus: {campus.name}</h3>
-    //         </Link>
-    //     </div>
-
-    // );
   }
 }
 

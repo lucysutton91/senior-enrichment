@@ -15,8 +15,7 @@ export default class EditCampusForm extends Component {
 
     componentDidMount () {
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
-        // store.dispatch(fetchCampus(this.props.campus.id));
-        // store.dispatch(fetchStudentsByCampus(this.props.campus.id));
+
       }
 
     componentWillUnmount() {

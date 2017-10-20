@@ -1,9 +1,3 @@
-// import { createStore, applyMiddleware } from 'redux';
-// import rootReducer from './reducers';
-// import createLogger from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
-// import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
-
-// export default createStore(rootReducer, applyMiddleware(thunkMiddleware, createLogger()))
 
 import axios from 'axios';
 import { createStore, applyMiddleware } from 'redux';
@@ -18,7 +12,8 @@ const initialState = {
   campuses: [],
   currentStudent: {},
   currentCampus: {},
-  editingCampus: false
+  editingCampus: false,
+  editingStudent: false
 };
 
 // ACTION TYPES
@@ -30,12 +25,18 @@ const GET_CAMPUS = 'GET_CAMPUS';
 const ADD_STUDENT = 'ADD_STUDENT';
 const ADD_CAMPUS = 'ADD_CAMPUS';
 const TOGGLE_EDIT_CAMPUS = 'TOGGLE_EDIT_CAMPUS';
+const TOGGLE_EDIT_STUDENT = 'TOGGLE_EDIT_STUDENT';
 
 
 // ACTION CREATORS
 
 export function changeCampusEditingStatus (boolean) {
     const action = { type: TOGGLE_EDIT_CAMPUS, boolean };
+    return action;
+}
+
+export function changeStudentEditingStatus (boolean) {
+    const action = { type: TOGGLE_EDIT_STUDENT, boolean };
     return action;
 }
 
@@ -83,10 +84,10 @@ export function fetchStudents () {
   }
 }
 
-export function fetchStudent () {
+export function fetchStudent (studentId) {
 
     return function thunk (dispatch) {
-        return axios.get('/api/student/:studentId')
+        return axios.get(`/api/students/${studentId}`)
             .then(res => res.data)
             .then(student => {
                 const action = getStudent(student);
@@ -168,7 +169,7 @@ function reducer (state = initialState, action) {
             break;
 
         case GET_STUDENT:
-            newState = Object.assign({}, state, { currentStudent: action.currentStudent });
+            newState = Object.assign({}, state, { currentStudent: action.student });
             break;
 
         case GET_CAMPUSES:
@@ -186,15 +187,23 @@ function reducer (state = initialState, action) {
         case ADD_CAMPUS:
             newState = Object.assign({}, state, { campuses: [...action.campuses, action.campus] });
             break;
+
         case TOGGLE_EDIT_CAMPUS:
             newState = Object.assign({}, state, { editingCampus: action.boolean });
             break;
+
+        case TOGGLE_EDIT_STUDENT:
+            newState = Object.assign({}, state, { editingStudent: action.boolean });
+            break;
+
         default:
             newState = state;
             break;
     }
     return newState;
 }
+
+// CREATE AND EXPORT STORE
 
 const store = createStore(
   reducer,
