@@ -3,11 +3,11 @@ const Sequelize = require('sequelize');
 const db = require('../index.js');
 
 const Student = db.define('student', {
-    name : {
-        type : Sequelize.STRING,
-        allowNull : false
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
-    email : Sequelize.STRING
+    email: Sequelize.STRING
 });
 
 module.exports = Student;

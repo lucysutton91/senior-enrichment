@@ -2,7 +2,6 @@ body {
     background-color: #ecf0f1;
 }
 
-
 .body-border {
     margin: 1em 1em 1em 1em;
 }
@@ -11,30 +10,25 @@ p {
     color: #c7254e;
 }
 
-/* .student-list {
-    display: inline-block;
-} */
-
 .add-btn {
     float: right;
 }
 
 .add-form {
     display: inline-grid;
+    width: 33%;
 }
 
 .interior {
     margin : 0 2em 2em 2em;
     display: flex;
-}
-
-.interior-students {
     flex-direction: column;
 }
 
-.students-header {
+.page-header {
     display: flex;
     justify-content: space-between;
+    margin: 0 0 30px;
 }
 
 .campus-edit-student-list {
@@ -42,30 +36,31 @@ p {
 }
 
 .edit-form {
-    display: inline-grid;
+    display: inline-block;
     width: 33%;
 }
 .edit-form-el {
     width: 100%;
 }
-li {
-    list-style-type: none;
-}
+
 .campus-edit-student-list {
      padding : 0 0 0 0;
 }
+
 .edit-form-name {
     font-size: 15px;
     font-style: bold;
 }
+
 .edit-form-email {
     font-size: 15px;
 }
+
 .campus-image {
     width: 100%;
 }
 
-.student-square {
+.page-square {
     display: flex;
 }
 
@@ -76,4 +71,17 @@ li {
 
 .student-image {
     border-radius: 4px;
+}
+
+.hero {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.save-btn {
+    margin: 3% 0 0 0;
+}
+
+.campus-name {
+    margin-top: 10px;
 }

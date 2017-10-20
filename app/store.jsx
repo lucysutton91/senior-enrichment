@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { createStore, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
@@ -8,12 +7,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // INITIAL STATE
 
 const initialState = {
-  students: [],
-  campuses: [],
-  currentStudent: {},
-  currentCampus: {},
-  editingCampus: false,
-  editingStudent: false
+    students: [],
+    campuses: [],
+    currentStudent: {},
+    currentCampus: {},
+    editingCampus: false,
+    editingStudent: false
 };
 
 // ACTION TYPES
@@ -30,63 +29,63 @@ const TOGGLE_EDIT_STUDENT = 'TOGGLE_EDIT_STUDENT';
 
 // ACTION CREATORS
 
-export function changeCampusEditingStatus (boolean) {
+export function changeCampusEditingStatus(boolean) {
     const action = { type: TOGGLE_EDIT_CAMPUS, boolean };
     return action;
 }
 
-export function changeStudentEditingStatus (boolean) {
+export function changeStudentEditingStatus(boolean) {
     const action = { type: TOGGLE_EDIT_STUDENT, boolean };
     return action;
 }
 
-export function getStudents (students) {
+export function getStudents(students) {
     const action = { type: GET_STUDENTS, students };
     return action;
 }
 
-export function getStudent (student) {
+export function getStudent(student) {
     const action = { type: GET_STUDENT, student };
     return action;
 }
 
-export function getCampuses (campuses) {
+export function getCampuses(campuses) {
     const action = { type: GET_CAMPUSES, campuses };
     return action;
 }
 
-export function getCampus (campus) {
+export function getCampus(campus) {
     const action = { type: GET_CAMPUS, campus };
     return action;
 }
 
-export function addStudent (studentInfo) {
+export function addStudent(studentInfo) {
     const action = { type: ADD_STUDENT, studentInfo };
     return action;
 }
 
-export function addCampus (campusInfo) {
+export function addCampus(campusInfo) {
     const action = { type: ADD_CAMPUS, campusInfo };
     return action;
 }
 
 // THUNK CREATORS
 
-export function fetchStudents () {
+export function fetchStudents() {
 
-  return function thunk (dispatch) {
-    return axios.get('/api/students')
-      .then(res => res.data)
-      .then(students => {
-        const action = getStudents(students);
-        dispatch(action);
-      });
-  }
+    return function thunk(dispatch) {
+        return axios.get('/api/students')
+            .then(res => res.data)
+            .then(students => {
+                const action = getStudents(students);
+                dispatch(action);
+            });
+    }
 }
 
-export function fetchStudent (studentId) {
+export function fetchStudent(studentId) {
 
-    return function thunk (dispatch) {
+    return function thunk(dispatch) {
         return axios.get(`/api/students/${studentId}`)
             .then(res => res.data)
             .then(student => {
@@ -96,9 +95,9 @@ export function fetchStudent (studentId) {
     }
 }
 
-export function fetchCampuses () {
+export function fetchCampuses() {
 
-      return function thunk (dispatch) {
+    return function thunk(dispatch) {
         return axios.get('/api/campuses')
             .then(res => res.data)
             .then(campuses => {
@@ -108,9 +107,9 @@ export function fetchCampuses () {
     }
 }
 
-export function fetchCampus (campusId) {
+export function fetchCampus(campusId) {
 
-    return function thunk (dispatch) {
+    return function thunk(dispatch) {
         return axios.get(`/api/campuses/${campusId}`)
             .then(res => res.data)
             .then(campus => {
@@ -120,21 +119,21 @@ export function fetchCampus (campusId) {
     }
 }
 
-export function registerStudent (studentInfo) {
+export function registerStudent(studentInfo) {
 
-  return function thunk (dispatch) {
-    return axios.post('/api/students', studentInfo)
-        .then(res => res.data)
-        .then(newStudent => {
-            const action = addStudent(newStudent);
-            dispatch(action);
-        });
+    return function thunk(dispatch) {
+        return axios.post('/api/students', studentInfo)
+            .then(res => res.data)
+            .then(newStudent => {
+                const action = addStudent(newStudent);
+                dispatch(action);
+            });
     }
 }
 
-export function registerCampus (campusInfo) {
+export function registerCampus(campusInfo) {
 
-    return function thunk (dispatch) {
+    return function thunk(dispatch) {
         return axios.post('/api/campuses', campusInfo)
             .then(res => res.data)
             .then(newCampus => {
@@ -145,22 +144,22 @@ export function registerCampus (campusInfo) {
 
 }
 
-export function fetchStudentsByCampus (campusId) {
-    
-        return function thunk (dispatch) {
-            return axios.get(`/api/campuses/${campusId}/students`)
+export function fetchStudentsByCampus(campusId) {
+
+    return function thunk(dispatch) {
+        return axios.get(`/api/campuses/${campusId}/students`)
             .then(res => res.data)
             .then(students => {
                 const action = getStudents(students);
                 dispatch(action);
             });
-        }
-    
+    }
+
 }
 
 // REDUCER
 
-function reducer (state = initialState, action) {
+function reducer(state = initialState, action) {
     let newState;
     switch (action.type) {
 
@@ -206,11 +205,11 @@ function reducer (state = initialState, action) {
 // CREATE AND EXPORT STORE
 
 const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(
-    thunkMiddleware,
-    createLogger()
-  ))
+    reducer,
+    composeWithDevTools(applyMiddleware(
+        thunkMiddleware,
+        createLogger()
+    ))
 );
 
 export default store;

@@ -1,6 +1,3 @@
-// get requests have been tested and are working
-// post and put requests tested with postman and working
-
 const express = require('express');
 const api = require('express').Router();
 const models = require('../../db/models/index.js');
@@ -9,56 +6,62 @@ const Student = models.Student;
 
 api.get('/', (req, res, next) => {
 	Campus.findAll()
-	.then(schools => {
-		res.json(schools)
-	})
-	.catch(next);
+		.then(schools => {
+			res.json(schools)
+		})
+		.catch(next);
 });
+
 api.get('/:campusId', (req, res, next) => {
 	Campus.findById(req.params.campusId)
-	.then(campus => {
-		res.json(campus)
-	})
-	.catch(next)
+		.then(campus => {
+			res.json(campus)
+		})
+		.catch(next)
 });
+
 api.get('/:campusId/students', (req, res, next) => {
-	Student.findAll( { where : { campusId : req.params.campusId } } )
-	.then(students => {
-		res.json(students)
-	})
-	.catch(next)
+	Student.findAll({ where: { campusId: req.params.campusId } })
+		.then(students => {
+			res.json(students)
+		})
+		.catch(next)
 });
+
 api.post('/', (req, res, next) => {
 	Campus.create({
-		name : req.body.name,
-		imageURL : req.body.imageURL
+		name: req.body.name,
+		imageURL: req.body.imageURL
 	})
-	.then(newSchool => {
-		res.json(newSchool)
-	})
-	.catch(next)
+		.then(newSchool => {
+			res.json(newSchool)
+		})
+		.catch(next)
 });
+
 api.put('/:campusId', (req, res, next) => {
 	Campus.findById(req.params.campusId)
-	.then(campus => {
-		campus.update({
-			name : req.body.name,
-			imageURL : req.body.imageURL
+		.then(campus => {
+			campus.update({
+				name: req.body.name,
+				imageURL: req.body.imageURL
+			})
+				.then(updatedSchool => {
+					res.json(updatedSchool)
+				})
 		})
-		.then(updatedSchool => {
-			res.json(updatedSchool)
-		})
-	})
-	.catch(next)
+		.catch(next)
 });
+
 api.delete('/:campusId', (req, res, next) => {
 	Campus.findById(req.params.campusId)
-	.then(school => {
-		school.destroy()
-		.then(() => {
-			res.json('campus deleted')
+		.then(school => {
+			school.destroy()
+				.then(() => {
+					res.json('campus deleted')
+				})
 		})
-	})
-	.catch(next)
+		.catch(next)
 });
+
 module.exports = api
